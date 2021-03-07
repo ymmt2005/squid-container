@@ -1,0 +1,27 @@
+name: Main
+on:
+  pull_request:
+  push:
+    tags:
+    - 'v*'
+    branches:
+    - 'main'
+jobs:
+  build:
+    name: Build images
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: |
+          docker build -t ghcr.io/ymmt2005/squid:latest .
+      - name: Push image
+        if: github.event_name != 'pull_request'
+        run: |
+          echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+          TAG=latest
+          if echo "${GITHUB_REF}" | grep -q refs/tags/v; then
+              TAG=${GITHUB_REF#refs/tags/v}
+              docker tag quay.io/ymmt2005/squid:latest quay.io/ymmt2005/squid:${TAG}
+          fi
+          docker push quay.io/cybozu/${d}:$TAG
