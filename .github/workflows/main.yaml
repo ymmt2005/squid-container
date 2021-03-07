@@ -22,6 +22,6 @@ jobs:
           TAG=latest
           if echo "${GITHUB_REF}" | grep -q refs/tags/v; then
               TAG=${GITHUB_REF#refs/tags/v}
-              docker tag quay.io/ymmt2005/squid:latest quay.io/ymmt2005/squid:${TAG}
+              docker tag ghcr.io/ymmt2005/squid:latest ghcr.io/ymmt2005/squid:${TAG}
           fi
-          docker push quay.io/cybozu/${d}:$TAG
+          docker push ghcr.io/ymmt2005/squid:${TAG}

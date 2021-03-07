@@ -29,6 +29,8 @@ RUN curl -sfLO http://www.squid-cache.org/Versions/v4/squid-${SQUID_VERSION}.tar
 # stage2: production image
 FROM ubuntu:20.04
 
+LABEL org.opencontainers.image.source https://github.com/ymmt2005/squid-container
+
 COPY --from=build /usr/local/squid /usr/local/squid
 COPY --from=build /etc/squid /etc/squid
 
