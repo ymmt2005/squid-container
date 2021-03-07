@@ -1,4 +1,4 @@
-![CI](https://github.com/ymmt2005/squid-container/workflows/CI/badge.svg)
+![CI](https://github.com/ymmt2005/squid-container/workflows/main/badge.svg)
 
 # Squid container
 
